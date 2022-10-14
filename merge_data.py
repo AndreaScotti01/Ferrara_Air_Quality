@@ -38,5 +38,5 @@ def merge_all_datas(main_folder_path):
     return pd.concat(ls)
 
 if __name__ == "__main__":
-    merge_all_datas('G:/Jupiter files/Python/Esercizi/Progetti/Ferrara/Dati').to_csv('G:/Jupiter files/Python/Esercizi/Progetti/Ferrara/merged_datas.csv')
+    merge_all_datas(str(os.getcwd()) + "/Dati").to_csv(os.getcwd())
     
