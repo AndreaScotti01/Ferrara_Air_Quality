@@ -40,3 +40,10 @@ def merge_all_datas(main_folder_path):
 if __name__ == "__main__":
     merge_all_datas(str(os.getcwd()) + "/Dati").to_csv(os.getcwd())
     
+def get_rolling_mean(df,location_col,location_param,col,num,center):
+    df_rolling = df.copy()
+    df_rolling = df_rolling.loc[df_rolling[location_col] == location_param].copy()
+    for cols in col:
+        df_rolling[f"Rolling_{cols}"] = df_rolling[cols].rolling(int(num),center=center).mean()
+    return df_rolling
+    
