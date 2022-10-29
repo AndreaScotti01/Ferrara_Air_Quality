@@ -44,6 +44,25 @@ def get_rolling_mean(df,location_col,location_param,col,num,center):
         df_rolling[f"Rolling_{cols}"] = df_rolling[cols].rolling(int(num),center=center).mean()
     return df_rolling
 
+def merge_single_csv(folder_p):
+    path = folder_p
+    folders = os.listdir(path)
+    ls1 = []
+    for f in folders:
+        folder_path = path + f"/{f}"
+        location_name = folder_path.split("-")[-1].replace(" ","")
+        ls = []
+        for file in os.listdir(folder_path):
+            file_path = folder_path + f"/{file}"
+            value_name = file.split("_")[0]
+            file_content = pd.read_csv(file_path,parse_dates=["Data osservazione"],index_col="Data osservazione").rename(columns={"Valore":value_name})
+            file_content["Location"] = location_name
+            ls.append(file_content)
+    
+        merged_data = reduce(pd.DataFrame.combine_first, ls)
+        ls1.append(merged_data)
+    return pd.concat(ls1)
+
 if __name__ == "__main__":
     merge_all_datas(str(os.getcwd()) + "/Dati").to_csv(os.getcwd())
     

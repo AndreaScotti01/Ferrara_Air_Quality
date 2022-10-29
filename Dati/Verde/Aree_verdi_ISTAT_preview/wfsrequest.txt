@@ -1,1 +1,0 @@
-https://sit.comune.fe.it/geoserverckan/Ferrara/Aree_verdi_ISTAT_preview/wfs?service=WFS&version=1.3.0&request=GetFeature&typename=Ferrara:Aree_verdi_ISTAT_preview&outputformat=shape-zip
